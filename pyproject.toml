@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "electronic-shop"
+version = "0.1.0"
+description = ""
+authors = ["Dmitrii Degtiarev <9774385859@mail.ru>"]
+readme = "README.md"
+packages = [{include = "electronic_shop"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
