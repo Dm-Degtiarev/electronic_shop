@@ -28,3 +28,31 @@ def test_goods_sale_calc():
     goods_3 = Goods('товар', 100, 2)
     goods_3.sale_calc()
     assert goods_3.price == 85.0
+
+
+def test_goods_goods_name():
+    """Тестирует коррекктность работы проверки
+     на длинну символов атрибута goods_name"""
+    goods_4 = Goods('товар', 100, 2)
+    assert len(goods_4.goods_name) == 5
+    try:
+        goods_5 = Goods('товар_2585544', 100, 2)
+    except Exception as _ex:
+        except_text = 'Длина наименования товара превышает 10 символов.'
+        assert str(_ex) == except_text
+
+
+def test_instantiate_from_csv_():
+    Goods.objects_list = []
+    Goods.instantiate_from_csv()
+    goods_5 = Goods.objects_list[0]
+    assert len(Goods.objects_list) == 5
+    assert goods_5.goods_name == 'Смартфон'
+    assert goods_5.price == 100
+    assert goods_5.count == 1
+
+
+def test_is_integer():
+    assert Goods.is_integer(5) == True
+    assert Goods.is_integer(5.0) == True
+    assert  Goods.is_integer(5.5) == False
