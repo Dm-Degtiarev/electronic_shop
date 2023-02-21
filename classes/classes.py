@@ -1,13 +1,28 @@
+import csv
+
+
 class Goods:
     sale_percent = 0.85
     objects_list = []
 
     def __init__(self, goods_name: str, price: float, count: int):
         """Инициализация класса"""
-        self.goods_name = goods_name
+        self.goods_name  = goods_name
         self.price = price
         self.count = count
         self.objects_list.append(self)
+
+    @property
+    def goods_name(self) -> str:
+        """Возвращает наименование товара"""
+        return self.__goods_name
+
+    @goods_name.setter
+    def goods_name(self, name: str) -> None:
+        """Проверяет название товара на длинну до 10 символов"""
+        if len(name) > 10:
+            raise Exception('Длина наименования товара превышает 10 символов.')
+        self.__goods_name = name
 
 
     def price_calc(self) -> float:
@@ -20,3 +35,25 @@ class Goods:
         """Применяет скидку на товар"""
         self.price *= self.sale_percent
 
+
+    @classmethod
+    def instantiate_from_csv(cls, path='items.csv', encoding='windows-1251'):
+        """Создает объекты класса из CSV"""
+        with open(path, 'r', encoding=encoding) as file:
+            csv_file = csv.DictReader(file)
+
+            for line in csv_file:
+                cls(
+                    goods_name=line['name'],
+                    price=float(line['price']),
+                    count=int(line['quantity'])
+                )
+
+
+    @staticmethod
+    def is_integer(attr):
+        """Проверяет, является ли число целым"""
+        if attr % 1 == 0:
+            return True
+        else:
+            return False
