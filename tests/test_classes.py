@@ -43,6 +43,7 @@ def test_goods_goods_name():
 
 
 def test_instantiate_from_csv_():
+    """Тестирует создание объектов класаа из CSV"""
     Goods.objects_list = []
     Goods.instantiate_from_csv()
     goods_5 = Goods.objects_list[0]
@@ -53,6 +54,7 @@ def test_instantiate_from_csv_():
 
 
 def test_is_integer():
+    """Тестирует метод определения 'целого числа'"""
     assert Goods.is_integer(5) == True
     assert Goods.is_integer(5.0) == True
     assert  Goods.is_integer(5.5) == False
