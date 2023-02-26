@@ -55,6 +55,18 @@ def test_instantiate_from_csv_():
 
 def test_is_integer():
     """Тестирует метод определения 'целого числа'"""
-    assert Goods.is_integer(5) == True
-    assert Goods.is_integer(5.0) == True
-    assert  Goods.is_integer(5.5) == False
+    assert Goods.is_integer(5) is True
+    assert Goods.is_integer(5.0) is True
+    assert Goods.is_integer(5.5) is False
+
+
+def test_repr():
+    """Тестирует магический метод __repr__"""
+    goods_6 = Goods('товар', 25.05, 25)
+    assert goods_6.__repr__() == "Goods('товар', 25.05, 25)"
+
+
+def test_str():
+    """Тестирует магический метод __str__"""
+    goods_7 = Goods('товар', 25.05, 25)
+    assert str(goods_7) == 'товар'
