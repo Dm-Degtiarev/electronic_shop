@@ -12,6 +12,14 @@ class Goods:
         self.count = count
         self.objects_list.append(self)
 
+    def __repr__(self):
+        """Отображает информацию об объекте класса в режиме отладки (для разработчиков)"""
+        return f"{self.__class__.__name__}('{self.__goods_name}', {self.price}, {self.count})"
+
+    def __str__(self):
+        """отображает информацию о объекте класса для пользователей (print, str)"""
+        return self.__goods_name
+
     @property
     def goods_name(self) -> str:
         """Возвращает наименование товара"""
@@ -24,17 +32,14 @@ class Goods:
             raise Exception('Длина наименования товара превышает 10 символов.')
         self.__goods_name = name
 
-
     def price_calc(self) -> float:
         """Вычисляет сумму по позиции"""
         goods_price = self.price * self.count
         return goods_price
 
-
     def sale_calc(self) -> None:
         """Применяет скидку на товар"""
         self.price *= self.sale_percent
-
 
     @classmethod
     def instantiate_from_csv(cls, path='items.csv', encoding='windows-1251'):
@@ -49,7 +54,6 @@ class Goods:
                     count=int(line['quantity'])
                 )
 
-
     @staticmethod
     def is_integer(attr):
         """Проверяет, является ли число целым"""
@@ -57,3 +61,5 @@ class Goods:
             return True
         else:
             return False
+
+
