@@ -1,4 +1,4 @@
-from classes.classes import Goods
+from classes.goods import Goods
 
 
 def test_goods_init():
