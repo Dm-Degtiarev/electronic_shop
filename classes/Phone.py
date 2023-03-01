@@ -19,9 +19,6 @@ class Phone(Goods):
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
         self.__sim_cnt = cnt
 
-    def __repr__(self):
-        """Отображает информацию об объекте класса в режиме отладки (для разработчиков)"""
-        return f"{super().__repr__().replace(')', ',')} {self.sim_cnt})"
 
     def __add__(self, other):
         """Позволяет складывать кол-во товара классов: 'Phone', 'Goods' """
