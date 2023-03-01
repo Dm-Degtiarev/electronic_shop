@@ -19,6 +19,7 @@ class Phone(Goods):
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
         self.__sim_cnt = cnt
 
+
     def __add__(self, other):
         """Позволяет складывать кол-во товара классов: 'Phone', 'Goods' """
         valid_classes = ['Phone', 'Goods']

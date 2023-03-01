@@ -36,5 +36,3 @@ def test_add():
 
     assert phone + goods == 50
 
-
-
