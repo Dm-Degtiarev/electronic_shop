@@ -36,3 +36,8 @@ def test_add():
 
     assert phone + goods == 50
 
+
+def test_repr():
+    """Тестирует магический метод __repr__"""
+    phone = Phone('товар', 25.05, 25, 2)
+    assert phone.__repr__() == "Phone('товар', 25.05, 25, 2)"
