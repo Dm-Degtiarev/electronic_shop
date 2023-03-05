@@ -11,6 +11,7 @@ class Goods:
         self.price = price
         self.count = count
         self.objects_list.append(self)
+        super().__init__()
 
     def __repr__(self):
         """Отображает информацию об объекте класса в режиме отладки (для разработчиков)"""
