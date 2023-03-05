@@ -35,6 +35,7 @@ def test_add():
         iphone + goods
 
     assert phone + goods == 50
+    assert goods + phone == 50
 
 
 def test_repr():

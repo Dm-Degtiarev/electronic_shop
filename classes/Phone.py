@@ -32,3 +32,6 @@ class Phone(Goods):
                     return self.count + other.count
         else:
             raise TypeError('Данные классы запрещено складывать')
+
+    def __radd__(self, other):
+        return self.__add__(other)
