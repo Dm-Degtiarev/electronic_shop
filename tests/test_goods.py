@@ -1,4 +1,5 @@
 from classes.goods import Goods
+from exceptions.ex_goods import InstantiateCSVError
 
 
 def test_goods_init():
@@ -35,6 +36,7 @@ def test_goods_goods_name():
      на длинну символов атрибута goods_name"""
     goods_4 = Goods('товар', 100, 2)
     assert len(goods_4.goods_name) == 5
+
     try:
         goods_5 = Goods('товар_2585544', 100, 2)
     except Exception as _ex:
@@ -51,6 +53,17 @@ def test_instantiate_from_csv_():
     assert goods_5.goods_name == 'Смартфон'
     assert goods_5.price == 100
     assert goods_5.count == 1
+
+    try:
+        Goods.instantiate_from_csv(path='nofile')
+    except FileNotFoundError as _ex:
+        assert str(_ex) == "Отсутствует файл nofile"
+
+    try:
+        Goods.instantiate_from_csv(path='items_t.csv')
+    except InstantiateCSVError as _ex:
+        assert str(_ex) == "Файл items_t.csv поврежден"
+
 
 
 def test_is_integer():

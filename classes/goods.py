@@ -1,4 +1,5 @@
 import csv
+from exceptions.ex_goods import InstantiateCSVError
 
 
 class Goods:
@@ -45,15 +46,22 @@ class Goods:
     @classmethod
     def instantiate_from_csv(cls, path='items.csv', encoding='windows-1251'):
         """Создает объекты класса из CSV"""
-        with open(path, 'r', encoding=encoding) as file:
-            csv_file = csv.DictReader(file)
+        try:
+            with open(path, 'r', encoding=encoding) as file:
+                csv_file = csv.DictReader(file)
+                parse_columns = ['name', 'price', 'quantity']
 
-            for line in csv_file:
-                cls(
-                    goods_name=line['name'],
-                    price=float(line['price']),
-                    count=int(line['quantity'])
-                )
+                # записываем данные из файла
+                for line in csv_file:
+                    if list(line.keys()) != parse_columns:
+                        raise InstantiateCSVError(f'Файл {path} поврежден')
+                    cls(
+                        goods_name=line['name'],
+                        price=float(line['price']),
+                        count=int(line['quantity'])
+                    )
+        except FileNotFoundError:
+            raise FileNotFoundError(f'Отсутствует файл {path}')
 
     @staticmethod
     def is_integer(attr):
@@ -62,5 +70,3 @@ class Goods:
             return True
         else:
             return False
-
-
